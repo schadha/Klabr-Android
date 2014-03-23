@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -106,17 +107,31 @@ public class SearchActivity extends Activity {
 			    
 			    placeNames.removeAll(placeNames);
 			    placeLocation.removeAll(placeLocation);
-
+			    
 			    try {
+			    	if(getCurrentFocus()!=null && getCurrentFocus() instanceof EditText){
+			            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+			            imm.hideSoftInputFromWindow(searchField.getWindowToken(), 0);
+			        }
+			    	
 					String totalJson = new SearchAsyncTask().execute().get();
 					JSONObject jObject = new JSONObject(totalJson);
 					JSONArray results = jObject.getJSONArray("results");
 					
-					for (int i = 0; i < results.length(); i++)
+					if (results.length() > 0)
 					{
-						placeNames.add(((JSONObject)results.get(i)).getString("name"));
-						placeLocation.add(((JSONObject)results.get(i)).getString("vicinity"));
+						searchView.setEnabled(true);
+						for (int i = 0; i < results.length(); i++)
+						{
+							placeNames.add(((JSONObject)results.get(i)).getString("name"));
+							placeLocation.add(((JSONObject)results.get(i)).getString("vicinity"));
+						}
+					} else {
+						placeNames.add("No results found");
+						searchView.setEnabled(false);
+
 					}
+					
 					
 					ArrayAdapter<String> adp=new ArrayAdapter<String> (getBaseContext(),
 							android.R.layout.simple_dropdown_item_1line,placeNames);
@@ -189,18 +204,19 @@ public class SearchActivity extends Activity {
 
 		private String getParameters() {
 			
-			String[] textArray = searchField.getText().toString().split(" ");
-			StringBuilder textArrayToSearch = new StringBuilder();
-			for (int i = 0; i < textArray.length; i++)
-			{
-				textArrayToSearch.append(textArray[i]);
-			}
+//			String[] textArray = searchField.getText().toString().replace(" ", "%20");
+//			StringBuilder textArrayToSearch = new StringBuilder();
+//			for (int i = 0; i < textArray.length; i++)
+//			{
+//				textArrayToSearch.append(textArray[i]);
+//			}
+			String replaceString = searchField.getText().toString().replace(" ", "%20");
 			StringBuilder builder = new StringBuilder();
 			builder.append("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
 			builder.append("location="+ lat + "," + lon + "&");
 			builder.append("radius=50000&");
 			builder.append("rankBy=distance&");
-			builder.append("name=" + textArrayToSearch.toString() + "&");
+			builder.append("name=" + replaceString + "&");
 			builder.append("sensor=true&");
 			builder.append("key=" + KEY);
 			return builder.toString();

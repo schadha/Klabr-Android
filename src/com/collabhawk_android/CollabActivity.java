@@ -35,6 +35,8 @@ import android.widget.Toast;
 public class CollabActivity extends Activity {
 	private Button logInButton;
 	private EditText userName, password;
+	private String SERVER_IP = "http://10.0.0.14:3000";
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +123,7 @@ public class CollabActivity extends Activity {
 		protected String doInBackground(Void... arg0) {
 			// Create a new HttpClient and Post Header
 		    HttpClient httpclient = new DefaultHttpClient();
-		    HttpPost httppost = new HttpPost("http://192.168.1.9:3000/user/login");
+		    HttpPost httppost = new HttpPost(SERVER_IP + "/user/login");
 
 		    try {
 		    	String userNameString = userName.getText().toString();

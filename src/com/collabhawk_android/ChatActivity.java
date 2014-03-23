@@ -32,6 +32,7 @@ public class ChatActivity extends Activity{
 	SocketIO socket;
 	ArrayList<String> messages;
 	ArrayAdapter<String> adp;
+	private String SERVER_IP = "http://10.0.0.14:3000";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,66 +51,80 @@ public class ChatActivity extends Activity{
 		messages = new ArrayList<String>();
 		btn_Send.setOnClickListener(socketListener);
 		adp = new ArrayAdapter<String> (getBaseContext(),
-				android.R.layout.simple_dropdown_item_1line,messages);
-		adp.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+				R.layout.custom_list,messages);
+//		adp.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 		listView.setAdapter(adp);
 		connectSockets();
 	}
 	
 	private void connectSockets()
 	{
-		try {
-			socket = new SocketIO("http://192.168.1.9:3000");
-			socket.connect(new IOCallback() {
-			    @Override
-			    public void on(String event, IOAcknowledge ack, Object... args) {
-			        if ("new_message".equals(event) && args.length > 0) {
-			            JSONObject jObject = (JSONObject) args[0];
-			            try {
-							messages.add(jObject.getString("Username") + " said: " + jObject.getString("Message"));
-							} catch (JSONException e) {
-							e.printStackTrace();
-						}
-			        } else if ("num_clients".equals(event) && args.length > 0) {
-			        } else if ("joined_room".equals(event) && args.length > 0) {
-			        	try {
-				        	JSONObject jObject = (JSONObject) args[0];
-							JSONArray jsonArgs = jObject.getJSONArray("messages");
-							for (int i = 0; i < jsonArgs.length(); i++)
-							{
-								JSONObject jMessage = jsonArgs.getJSONObject(i);
-								String userName = jMessage.getString("Username");
-								String message = jMessage.getString("said");
-								messages.add(userName + " said: " + message);
-							}
-				        	}catch (Exception e) {
-				        		e.printStackTrace();
-				        	}
-			        }
-			    }
+				try {
+					socket = new SocketIO(SERVER_IP);
+					socket.connect(new IOCallback() {
+					    @Override
+					    public void on(String event, IOAcknowledge ack, Object... args) {
+					        if ("new_message".equals(event) && args.length > 0) {
+					            JSONObject jObject = (JSONObject) args[0];
+					            try {
+									messages.add(jObject.getString("Username") + " said: " + jObject.getString("Message"));
+									runOnUiThread(new Runnable() {
+										@Override
+										public void run() {
+											adp.notifyDataSetChanged();
+								            listView.setSelection(adp.getCount() - 1);
+										}
+									});
+									} catch (JSONException e) {
+									e.printStackTrace();
+								}
+					        } else if ("num_clients".equals(event) && args.length > 0) {
+					        } else if ("joined_room".equals(event) && args.length > 0) {
+					        	try {
+						        	JSONObject jObject = (JSONObject) args[0];
+									JSONArray jsonArgs = jObject.getJSONArray("messages");
+									for (int i = 0; i < jsonArgs.length(); i++)
+									{
+										JSONObject jMessage = jsonArgs.getJSONObject(i);
+										String userName = jMessage.getString("Username");
+										String message = jMessage.getString("said");
+										messages.add(userName + " said: " + message);
+										runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												adp.notifyDataSetChanged();
+									            listView.setSelection(adp.getCount() - 1);
+											}
+										});
+									}
+						        	}catch (Exception e) {
+						        		e.printStackTrace();
+						        	}
+					        }
+					    }
 
-			    @Override
-			    public void onMessage(JSONObject json, IOAcknowledge ack) {}
-			    @Override
-			    public void onMessage(String data, IOAcknowledge ack) {}
-			    @Override
-			    public void onError(SocketIOException socketIOException) {}
-			    @Override
-			    public void onDisconnect() {}
-			    @Override
-			    public void onConnect() {}
-			});
-			
-			IOAcknowledge ack = new IOAcknowledge() {
-			    @Override
-			    public void ack(Object... args) {}
-			};
-			socket.emit("join_room", ack, getIntent().getExtras().getString("room"));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
+					    @Override
+					    public void onMessage(JSONObject json, IOAcknowledge ack) {}
+					    @Override
+					    public void onMessage(String data, IOAcknowledge ack) {}
+					    @Override
+					    public void onError(SocketIOException socketIOException) {}
+					    @Override
+					    public void onDisconnect() {}
+					    @Override
+					    public void onConnect() {}
+					});
+					
+					IOAcknowledge ack = new IOAcknowledge() {
+					    @Override
+					    public void ack(Object... args) {}
+					};
+					socket.emit("join_room", ack, getIntent().getExtras().getString("room"));
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}					
+}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -139,9 +154,10 @@ public class ChatActivity extends Activity{
 					socket.emit("add_message", ack, jObject);
 					messages.add(getIntent().getExtras().getString("Username") + " said: " + message);
 					adp = new ArrayAdapter<String> (getBaseContext(),
-							android.R.layout.simple_dropdown_item_1line,messages);
-					adp.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+							R.layout.custom_list, messages);
 					listView.setAdapter(adp);
+		            listView.setSelection(adp.getCount() - 1);
+		            input_text.setText("");
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
