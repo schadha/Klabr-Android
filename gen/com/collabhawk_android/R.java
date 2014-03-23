@@ -45,6 +45,7 @@ public final class R {
         public static final int activity_search=0x7f030002;
         public static final int custom_list=0x7f030003;
         public static final int row=0x7f030004;
+        public static final int search_list=0x7f030005;
     }
     public static final class menu {
         public static final int collab=0x7f070000;

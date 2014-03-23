@@ -67,6 +67,7 @@ public class SearchActivity extends Activity {
 	
 	private void initializeComponents() 
 	{
+		setTitle("Search Places");
 		searchField = (EditText) findViewById(R.id.searchText);
 		searchView = (ListView) findViewById(R.id.searchView);
 		searchButton = (Button) findViewById(R.id.searchButton);
@@ -204,12 +205,6 @@ public class SearchActivity extends Activity {
 
 		private String getParameters() {
 			
-//			String[] textArray = searchField.getText().toString().replace(" ", "%20");
-//			StringBuilder textArrayToSearch = new StringBuilder();
-//			for (int i = 0; i < textArray.length; i++)
-//			{
-//				textArrayToSearch.append(textArray[i]);
-//			}
 			String replaceString = searchField.getText().toString().replace(" ", "%20");
 			StringBuilder builder = new StringBuilder();
 			builder.append("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");

@@ -44,6 +44,7 @@ public class ChatActivity extends Activity{
 	
 	private void initializeComponents()
 	{
+		setTitle(getIntent().getStringExtra("room"));
 		input_text = (EditText) findViewById(R.id.input_text);
 		btn_Send = (Button) findViewById(R.id.btn_Send);
 		listView = (ListView) findViewById(R.id.listView);
