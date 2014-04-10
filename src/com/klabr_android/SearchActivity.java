@@ -163,6 +163,11 @@ public class SearchActivity extends Activity {
 						searchView.setEnabled(false);
 					}
 					String numClientJson = new NumClientsAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, placeNames).get();
+					if (numClientJson == null)
+					{
+						showToast("Server is down. Please try again later!");
+						return;
+					}
 				    JSONObject numClientObject = new JSONObject(numClientJson);
 					List<Map<String, String>> data = new ArrayList<Map<String, String>>();
 					for (int i = 0; i < placeNames.size(); i++) {

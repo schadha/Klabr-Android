@@ -34,7 +34,7 @@ public class ChatActivity extends Activity{
 	SocketIO socket;
 	ArrayList<String> messages;
 	ArrayAdapter<String> adp;
-	private String SERVER_IP = "http://mickey.cs.vt.edu:3000";//"http://ec2-54-186-249-114.us-west-2.compute.amazonaws.com:3000";//"http://10.0.0.14:3000";
+	private String SERVER_IP = "http://mickey.cs.vt.edu:3000";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
