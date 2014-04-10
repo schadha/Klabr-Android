@@ -1,10 +1,5 @@
 # cache for current jar dependency. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-<<<<<<< HEAD
-1395554816000 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e /Users/sanchit/Documents/workspace/CS Research/Klabr-Android/libs/android-support-v4.jar
+1397123596000 621451 5896b0a4e377ac4242eb2bc785220c1c4fc052f4 /Users/sanchit/Documents/workspace/CS Research/Klabr-Android/libs/android-support-v4.jar
 1390314803000 556198 4a6be13368bb64c5a0b0460632d228a1a915f58f /Users/sanchit/Documents/workspace/CS Research/AndroidBootstrap/libs/android-support-v4.jar
-=======
-1394428689000 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e /Users/Divit/Documents/EclipseWorkspace/CollabHawk-Android/libs/android-support-v4.jar
-1396220929000 556198 4a6be13368bb64c5a0b0460632d228a1a915f58f /Users/Divit/Downloads/Android-Bootstrap/AndroidBootstrap/libs/android-support-v4.jar
->>>>>>> FETCH_HEAD
