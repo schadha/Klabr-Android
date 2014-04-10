@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.collabhawk_android"
+    package="com.klabr_android"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -27,11 +27,11 @@
  
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/klabr_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.collabhawk_android.CollabActivity"
+            android:name="com.klabr_android.CollabActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,11 +40,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.collabhawk_android.SearchActivity"
+            android:name="com.klabr_android.SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
         <activity
-            android:name="com.collabhawk_android.ChatActivity"
+            android:name="com.klabr_android.ChatActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name="com.klabr_android.CreateAccount"
+            android:label="@string/title_activity_search" 
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:name="com.klabr_android.ForgotPassword"
             android:label="@string/title_activity_search" >
         </activity>
     </application>

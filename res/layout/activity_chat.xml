@@ -1,37 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="fill_parent"
-   android:layout_height="fill_parent"
-   android:orientation="vertical"
-     >
-  <ListView 
-  android:id="@+id/listView"
-  android:layout_height="wrap_content"
-  android:layout_width="fill_parent"
-  android:layout_weight="1.0"
-  ></ListView>
-      
-<LinearLayout 
-	   android:id="@+id/message_view"
-	   android:layout_width="fill_parent"
-	   android:layout_height="wrap_content"
-	   android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ChatActivity" >
 
-	   android:gravity="bottom">
-	 <EditText
-	    android:id="@+id/input_text"
-	    android:layout_width="125px"
-	    android:layout_height="wrap_content"
-	    android:hint = "Enter message here"
-	    android:layout_weight="0.8"
-	   />
-	 <Button
-	    android:id="@+id/btn_Send"
-	    android:layout_width="100px"
-	    android:layout_height="wrap_content"
-	    android:layout_weight="0.2"
-	    android:text="Send"
-	    />
-</LinearLayout>
-  </LinearLayout> 
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        android:id="@+id/input_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:layout_toLeftOf="@+id/btn_Send"
+        android:ems="10"
+        android:hint="Enter message here"
+        fontawesometext:be_roundedCorners="true"
+        fontawesometext:be_state="success" >
 
+        <requestFocus />
+    </com.beardedhen.androidbootstrap.BootstrapEditText>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/input_text"
+        android:layout_weight="1.0" >
+
+    </ListView>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btn_Send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="0dp"
+        android:text="Send"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="default"
+        fontawesometext:bb_type="success" >
+    </com.beardedhen.androidbootstrap.BootstrapButton>
+
+</RelativeLayout>
