@@ -36,7 +36,7 @@ import com.klabr_android.R;
 
 public class CreateAccount extends Activity {
 	private BootstrapButton createAccountButton;
-	private BootstrapEditText firstName, lastName, email, userName, password;
+	private BootstrapEditText userName, password1, password2;
 	private String SERVER_IP = "http://mickey.cs.vt.edu:3000";//"http://ec2-54-186-249-114.us-west-2.compute.amazonaws.com:3000";//"http://10.0.0.14:3000";
 
 	
@@ -59,27 +59,25 @@ public class CreateAccount extends Activity {
 	private void instantiateItems() 
 	{
 		createAccountButton = (BootstrapButton) findViewById(R.id.createAccountButton);
-		firstName = (BootstrapEditText) findViewById(R.id.firstName);
-		lastName = (BootstrapEditText) findViewById(R.id.lastName);
-		email = (BootstrapEditText) findViewById(R.id.email);
 		userName = (BootstrapEditText) findViewById(R.id.userName);
-		password = (BootstrapEditText) findViewById(R.id.password);
+		password1 = (BootstrapEditText) findViewById(R.id.password1);
+		password2 = (BootstrapEditText) findViewById(R.id.password2);
 		
 		createAccountButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				
-				String firstNameString = firstName.getText().toString();
-				String lastNameString = lastName.getText().toString();
-				String emailString = email.getText().toString();
 				String userNameString = userName.getText().toString();
-				String passwordString = password.getText().toString();
+				String password1String = password1.getText().toString();
+				String password2String = password2.getText().toString();
+				if (!password1String.equals(password2String))
+				{
+					showToast("Password don't match. Try again.");
+				}
 					try {
-						if (firstNameString != null && lastNameString != null && emailString != null &&
-								userNameString != null && passwordString != null && firstNameString.length() > 0 &&
-								lastNameString.length() > 0 && emailString.length() > 0 && userNameString.length() > 0 && 
-								passwordString.length() > 0)
+						if (userNameString != null && password1String != null && password2String != null
+								&& userNameString.length() > 0 && password1String.length() > 0 && password2String.length() > 0)
 						{
 							String result = new CreateAccountAsyncTask().execute().get();
 							if (result != null) {
@@ -133,17 +131,14 @@ public class CreateAccount extends Activity {
 		    HttpPost httppost = new HttpPost(SERVER_IP + "/user/create");
 
 		    try {
-		    	String firstNameString = firstName.getText().toString();
-				String lastNameString = lastName.getText().toString();
-				String emailString = email.getText().toString();
 		    	String userNameString = userName.getText().toString();
-				String passwordString = password.getText().toString();
+				String passwordString = password1.getText().toString();
 				
 				// Add your data
 		        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-		        nameValuePairs.add(new BasicNameValuePair("First_Name", firstNameString));
-		        nameValuePairs.add(new BasicNameValuePair("Last_Name", lastNameString));
-		        nameValuePairs.add(new BasicNameValuePair("Email", emailString));
+//		        nameValuePairs.add(new BasicNameValuePair("First_Name", firstNameString));
+//		        nameValuePairs.add(new BasicNameValuePair("Last_Name", lastNameString));
+//		        nameValuePairs.add(new BasicNameValuePair("Email", emailString));
 		        nameValuePairs.add(new BasicNameValuePair("Username", userNameString));
 		        nameValuePairs.add(new BasicNameValuePair("Password", passwordString));
 		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

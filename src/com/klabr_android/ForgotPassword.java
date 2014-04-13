@@ -36,7 +36,7 @@ import com.klabr_android.R;
 
 public class ForgotPassword extends Activity {
 	private BootstrapButton retrievePasswordButton;
-	private BootstrapEditText email;
+	private BootstrapEditText username;
 	private String SERVER_IP = "http://mickey.cs.vt.edu:3000";//"http://ec2-54-186-249-114.us-west-2.compute.amazonaws.com:3000";//"http://10.0.0.14:3000";
 
 	
@@ -59,16 +59,16 @@ public class ForgotPassword extends Activity {
 	private void instantiateItems() 
 	{
 		retrievePasswordButton = (BootstrapButton) findViewById(R.id.retrievePassword);
-		email = (BootstrapEditText) findViewById(R.id.email);
+		username = (BootstrapEditText) findViewById(R.id.username);
 		
 		retrievePasswordButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				
-				String emailString = email.getText().toString();
+				String usernameString = username.getText().toString();
 					try {
-						if (emailString != null && emailString.length() > 0)
+						if (usernameString != null && usernameString.length() > 0)
 						{
 							String result = new ForgotPasswordAsyncTask().execute().get();
 							if (result != null) {
@@ -126,11 +126,11 @@ public class ForgotPassword extends Activity {
 		    HttpPost httppost = new HttpPost(SERVER_IP + "/user/forgotpassword");
 
 		    try {
-		    	String emailString = email.getText().toString();
+		    	String usernameString = username.getText().toString();
 				
 				// Add your data
 		        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-		        nameValuePairs.add(new BasicNameValuePair("Email", emailString));
+		        nameValuePairs.add(new BasicNameValuePair("Username", usernameString));
 		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		        // Execute HTTP Post Request
