@@ -35,7 +35,7 @@ import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.klabr_android.R;
 
 public class CollabActivity extends Activity {
-	private BootstrapButton logInButton, createAccountButton, forgotPasswordButton;
+	private BootstrapButton logInButton, createAccountButton;//, forgotPasswordButton;
 	private BootstrapEditText userName, password;
 	private String SERVER_IP = "http://mickey.cs.vt.edu:3000";//"http://ec2-54-186-249-114.us-west-2.compute.amazonaws.com:3000";//"http://10.0.0.14:3000";
 
@@ -60,7 +60,7 @@ public class CollabActivity extends Activity {
 	{
 		logInButton = (BootstrapButton) findViewById(R.id.loginButton);
 		createAccountButton = (BootstrapButton) findViewById(R.id.createAccountButton);
-		forgotPasswordButton = (BootstrapButton) findViewById(R.id.forgotPasswordButton);
+//		forgotPasswordButton = (BootstrapButton) findViewById(R.id.forgotPasswordButton);
 		userName = (BootstrapEditText) findViewById(R.id.userName);
 		password = (BootstrapEditText) findViewById(R.id.password);
 		
@@ -124,15 +124,15 @@ public class CollabActivity extends Activity {
 			
 		});
 		
-		forgotPasswordButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				Intent i = new Intent(getApplicationContext(), ForgotPassword.class);
-				startActivity(i);
-			}
-			
-		});
+//		forgotPasswordButton.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View arg0) {
+//				Intent i = new Intent(getApplicationContext(), ForgotPassword.class);
+//				startActivity(i);
+//			}
+//			
+//		});
 	}
 	
 	private void showToast(String message) 

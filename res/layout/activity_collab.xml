@@ -79,7 +79,7 @@
 
     </com.beardedhen.androidbootstrap.BootstrapButton>
 
-    <com.beardedhen.androidbootstrap.BootstrapButton
+<!--     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/forgotPasswordButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,6 +91,6 @@
         fontawesometext:bb_type="danger"
         fontawesometext:bb_roundedCorners="true">
 
-    </com.beardedhen.androidbootstrap.BootstrapButton>
+    </com.beardedhen.androidbootstrap.BootstrapButton> -->
 
 </RelativeLayout>
