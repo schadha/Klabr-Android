@@ -100,9 +100,9 @@ public class SearchActivity extends Activity {
 					long arg3) {
 				Intent i = new Intent(getApplicationContext(), ChatActivity.class);
 	            i.putExtra("Username", getIntent().getStringExtra("Username"));
-	            i.putExtra("Email", getIntent().getStringExtra("Email"));
-	            i.putExtra("First_Name", getIntent().getStringExtra("First_Name"));
-	            i.putExtra("Last_Name", getIntent().getStringExtra("Last_Name"));
+//	            i.putExtra("Email", getIntent().getStringExtra("Email"));
+//	            i.putExtra("First_Name", getIntent().getStringExtra("First_Name"));
+//	            i.putExtra("Last_Name", getIntent().getStringExtra("Last_Name"));
 	            i.putExtra("id", getIntent().getStringExtra("id"));
 	            i.putExtra("room", placeNames.get(arg2));
 	            startActivity(i);
