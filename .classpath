@@ -7,5 +7,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="/Users/sanchit/Documents/workspace/CS Research/Klabr-Android/libs/android-support-v4.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/sanchit/Documents/workspace/CS Research/Klabr-Android/libs/socketio.jar"/>
+	<classpathentry kind="lib" path="/Users/sanchit/Documents/workspace/CS Research/google-play-services_lib/libs/google-play-services.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
